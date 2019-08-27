@@ -17,7 +17,7 @@ public class A1Adept {
 		
 		// building the inventory
 		for (int i = 0; i < inventoryct; i++) {
-			items[i] = scan.next().toLowerCase();
+			items[i] = scan.next();
 			itemprice[i] = scan.nextDouble();
 		}
 		
@@ -30,8 +30,8 @@ public class A1Adept {
 		
 		// customer data input
 		for (int i = 0; i < custcount; i++) {
-			firstname[i] = firstcap(scan.next());
-			lastname[i] = firstcap(scan.next());
+			firstname[i] = scan.next();
+			lastname[i] = scan.next();
 			itemspurchased = scan.nextInt();
 			
 			String item;
@@ -44,7 +44,7 @@ public class A1Adept {
 				
 				// comparing items to inventory to build price total
 				for (int k = 0; k < items.length; k++) {
-					if (item.toLowerCase().equals(items[k])) {
+					if (item.equals(items[k])) {
 						totals[i] += itemprice[k] * itemquant;
 					}
 				}
@@ -83,10 +83,5 @@ public class A1Adept {
 		System.out.println("Biggest: " + firstname[maxdex] + " " + lastname[maxdex] + " (" + String.format("%.2f", maxtotal) + ")");
 		System.out.println("Smallest: " + firstname[mindex] + " " + lastname[mindex] + " (" + String.format("%.2f", mintotal) + ")");
 		System.out.println("Average: " + String.format("%.2f", averagetotal));
-	}
-	
-	// firstcap method (for names)
-	public static String firstcap(String s) {
-		return s.toUpperCase().charAt(0) + s.substring(1).toLowerCase();
 	}
 }

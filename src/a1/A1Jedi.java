@@ -16,10 +16,11 @@ public class A1Jedi {
 				double[] itemprice = new double[inventoryct];
 				int[] itempurch = new int[inventoryct];
 				int[] itemquants = new int[inventoryct];
+				boolean[] itembought = new boolean[inventoryct];
 				
 				// building the inventory
 				for (int i = 0; i < inventoryct; i++) {
-					items[i] = scan.next().toLowerCase();
+					items[i] = scan.next();
 					itemprice[i] = scan.nextDouble();
 				}
 				
@@ -28,12 +29,11 @@ public class A1Jedi {
 				String[] firstname = new String[custcount];
 				String[] lastname = new String[custcount];
 				int itemspurchased = 0;
-				double[] totals = new double[custcount];
 				
 				// customer data input
 				for (int i = 0; i < custcount; i++) {
-					firstname[i] = firstcap(scan.next());
-					lastname[i] = firstcap(scan.next());
+					firstname[i] = scan.next();
+					lastname[i] = scan.next();
 					itemspurchased = scan.nextInt();
 					
 					String item;
@@ -44,13 +44,22 @@ public class A1Jedi {
 						itemquant = scan.nextInt();
 						item = scan.next();
 						
+						// 
 						for (int k = 0; k < items.length; k++) {
-							if (item.toLowerCase().equals(items[k])) {
-								itempurch[k] += 1;
+							if (item.equals(items[k])) {
+								itembought[k] = true;
 								itemquants[k] += itemquant;
 							}
 						}
 						
+					}
+					
+					for (int k = 0; k < items.length; k++) {
+						if (itembought[k] == true) {
+							itempurch[k] += 1;
+						}
+						// resetting itembought boolean
+						itembought[k] = false;
 					}
 				}
 				
@@ -59,9 +68,9 @@ public class A1Jedi {
 				
 				for (int i = 0; i < itempurch.length; i++) {
 					if (itempurch[i] == 0) {
-						System.out.println("No customers bought " + firstcap(items[i]));
+						System.out.println("No customers bought " + items[i]);
 					} else {
-						System.out.println(itempurch[i] + " customers bought " + itemquants[i] + " " + firstcap(items[i]));
+						System.out.println(itempurch[i] + " customers bought " + itemquants[i] + " " + items[i]);
 					}
 				}
 				

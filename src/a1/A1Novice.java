@@ -18,6 +18,7 @@ public class A1Novice {
 		String[] lastname = new String[customer_count];
 		int[] itemct = new int[customer_count];
 		double[] itemtotal = new double[customer_count];
+		int itemquant = 0;
 		
 		// customer data filling loop 
 		for (int i = 0; i < customer_count; i++) {
@@ -25,13 +26,14 @@ public class A1Novice {
 			lastname[i] = scan.next();
 			itemct[i] = scan.nextInt();
 			itemtotal[i] = 0;
+			itemquant = 0;
 			
 			// item loop for each customer
 			// don't need the names or quantities of the items!! 
 			for (int j = 0; j < itemct[i]; j++) {
-				scan.nextInt(); // throwaway quantity
+				itemquant = scan.nextInt(); // throwaway quantity
 				scan.next(); // throwaway item name
-				itemtotal[i] += scan.nextDouble(); 
+				itemtotal[i] += scan.nextDouble()*itemquant; 
 			}
 		}
 		
@@ -41,7 +43,7 @@ public class A1Novice {
 		// output
 		for (int k = 0; k < customer_count; k++) {
 			System.out.print(firstname[k].toUpperCase().charAt(0) + ". ");
-			System.out.print(lastname[k].toUpperCase().charAt(0) + lastname[k].toLowerCase().substring(1) + ": ");
+			System.out.print(lastname[k] + ": ");
 			System.out.print(String.format("%.2f", itemtotal[k]));
 			System.out.print("\n");
 		}
